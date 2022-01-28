@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ const Login = () => {
     const [user, setUser] = useState({
         username: '',
         password: '',
-        error: false
+        error: ''
     })
 
     const { push } = useHistory();
@@ -28,10 +28,7 @@ const Login = () => {
             push('/view')
         })
         .catch(err=>{
-            return(
-                setUser({
-                ...user,
-                error: err.data}))        
+            setUser(err.response.data)      
         })
     }
     
